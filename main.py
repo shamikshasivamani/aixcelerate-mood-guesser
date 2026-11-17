@@ -65,3 +65,20 @@ print(guess_mood("I got full marks in the test today!"))
 print(guess_mood("I lost my phone on the bus"))
 for sentence, mood in train_data:
     print(guess_mood(sentence), mood)
+
+practice_data = [
+    ("I won a medal in the sports meet", "Happy"),
+    ("I lost my notebook before the exam", "Sad"),
+    ("My friends gave me a lovely surprise", "Happy"),
+    ("The train was late and I felt upset", "Sad"),
+    ("Today was a great day", "Happy"),
+]
+
+correct = 0
+for sentence, mood in practice_data:
+    answer = guess_mood(sentence)
+    print(sentence, "->", answer)
+    if answer == mood:
+        correct = correct + 1
+
+print("Accuracy:", correct / len(practice_data) * 100, "%")
