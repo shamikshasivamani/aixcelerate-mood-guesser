@@ -36,3 +36,32 @@ def count_moods(data):
     return happy, sad
 
 print(count_moods(train_data))
+print(guess_mood("I got full marks in the test today!"))
+
+happy_words = ["won", "surprise", "full", "excited", "selected", "great", "favourite", "joyful", "awstruck", "fun"]
+sad_words = ["lost", "failed", "cancelled", "upset", "missed", "stopped", "lonely", "drained", "hopeless", "sorrow"]
+
+def guess_mood(sentence):
+    sentence = sentence.lower()
+    for ch in "!.,?":
+        sentence = sentence.replace(ch, "")
+    words = sentence.split()
+    happy_score = 0
+    sad_score = 0
+    for w in words:
+        if w in happy_words:
+            happy_score = happy_score + 1
+        if w in sad_words:
+            sad_score = sad_score + 1
+    if happy_score > sad_score:
+        return "Happy"
+    elif sad_score > happy_score:
+        return "Sad"
+    else:
+        # Tie: I choose Sad because when no happy clue is found,the sentence is more likely describing a failure or problem
+        return "Sad"
+print(len(happy_words),len(sad_words))
+print(guess_mood("I got full marks in the test today!"))
+print(guess_mood("I lost my phone on the bus"))
+for sentence, mood in train_data:
+    print(guess_mood(sentence), mood)
